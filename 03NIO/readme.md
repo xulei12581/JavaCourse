@@ -1,5 +1,7 @@
-1.在之前实现朴素的NettyHttpServer的基础上,按照提示的基础上,整合之前HttpClient客户端
-	真实地去调用一个后端的业务服
-	务,再把相应结果返回给前端的客户端
-	2.在上一个作业的基础上,根据filter接口实现一个filter,对所有的请求做一次过滤,
-	在用HttpClient请求后端服务的时候,用过滤器把请求头带过去,,比如请求头加一个key,value随意 
+必做作业题一:在之前实现朴素的NettyHttpServer的基础上,按照提示的基础上,整合之前HttpClient客户端真实地去调用一个后端的业务服务,再把相应结果返回给前端的客户端
+  作业在nio目录下,包含老师给的NettyHttpServer以及我写的controller文件,在启动服务后,页面调用controller接口的时候,与NettyHttpServer通信,返回请求
+
+
+
+必做作业题二:在上一个作业的基础上,根据filter接口实现一个filter,对所有的请求做一次过滤,在用HttpClient请求后端服务的时候,用过滤器把请求头带过去,,比如请求头加一个key,value随意 
+  作业为RequestHeadFilter类,实现了老师给的HttpRequestFilter接口,在请求头里加了xjava与kimmking键值对
