@@ -3,16 +3,13 @@ package com.geek.course.hello;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class ChildThread extends Thread {
 
     private static int result;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, BrokenBarrierException {
 
         long start = System.currentTimeMillis();
 
@@ -192,7 +189,32 @@ public class ChildThread extends Thread {
         /**
          * 第九种方式 线程池newWorkStealingPool的awaitTermination()方法
          */
-        ExecutorService executorService = Executors.newWorkStealingPool();
+//        ExecutorService executorService = Executors.newWorkStealingPool();
+//        Thread thread = new Thread() {
+//            public void run() {
+//                System.out.println(this.getName() + " start");
+//                try {
+//                    Thread.sleep(3000);
+//                    result = sum();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(this.getName() + " end");
+//
+//            }
+//        };
+//        executorService.execute(thread);
+//        executorService.shutdown();
+//        // awaitTermination返回false即超时会继续循环，
+//        // 返回true即线程池中的线程执行完成主线程跳出循环往下执行，每隔5秒循环一次
+//        while (!executorService.awaitTermination(3, TimeUnit.SECONDS)){
+//            // 超时等待后，可以手动结束所有正常执行的线程。不执行下面的语句将循环等待，直到所有子线程结束。
+//            // executorService.shutdownNow();
+//        }
+
+        /**
+         * 第十种方式 CyclicBarrier.await
+         */
         Thread thread = new Thread() {
             public void run() {
                 System.out.println(this.getName() + " start");
@@ -206,16 +228,8 @@ public class ChildThread extends Thread {
 
             }
         };
-        executorService.execute(thread);
-        executorService.shutdown();
-        // awaitTermination返回false即超时会继续循环，
-        // 返回true即线程池中的线程执行完成主线程跳出循环往下执行，每隔5秒循环一次
-        while (!executorService.awaitTermination(3, TimeUnit.SECONDS)){
-            // 超时等待后，可以手动结束所有正常执行的线程。不执行下面的语句将循环等待，直到所有子线程结束。
-            // executorService.shutdownNow();
-        }
-
-
+        CyclicBarrier barrier = new CyclicBarrier(1,thread);
+        barrier.await();
 
         System.out.println("所有子线程执行完毕了。。。");
         // 确保  拿到result 并输出
