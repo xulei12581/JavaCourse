@@ -1,6 +1,6 @@
 必做题1:写代码实现 Spring Bean 的装配，方式越多越好（XML、Annotation 都可以）
+   这边为了测试 都用xml的方式进行测试  第二种与第三种方式实际使用都不需要配置xml
   (1)通过 XML 装配 Bean
-	
   (2)通过 Java 代码配置 Bean
   (3))自动化装配 Bean
   第一种方式通过XML装配Bean 创建Spring配置文件beans1.xml装配Bean
