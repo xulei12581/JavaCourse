@@ -1,2 +1,3 @@
 必做题1:在InsertTest类中
-必做题2:在启动类与配置文件里配置了多数据源
+必做题2:在配置文件application-dev.yml
+必做题3:在配置文件application.yml
