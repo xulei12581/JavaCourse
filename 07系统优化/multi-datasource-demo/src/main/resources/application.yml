@@ -1,27 +1,20 @@
+
 spring:
-  shardingsphere:
-    datasource:
+  datasource:
+    names: master,slave0
+    master:
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: com.mysql.cj.jdbc.Driver
-      names: master,slave0,slave1
-      master:
-        url: jdbc:mysql://192.168.0.108:3306/spring?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=CTT
-        username: root
-        password: root
-      slave0:
-        url: jdbc:mysql://192.168.0.109:3306/spring?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=CTT
-        username: root
-        password: root
-      slave1:
-        url: jdbc:mysql://192.168.0.110:3306/spring?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=CTT
-        username: root
-        password: root
-    props:
-      sql.show: true
-    masterslave:
-      load-balance-algorithm-type: round_robin
-    sharding:
-      master-slave-rules:
-        master:
-          master-data-source-name: master
-          slave-data-source-names: slave0,slave1
+      url: jdbc:mysql://192.168.0.108:3306/spring?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=CTT
+      username: root
+      password: root
+    slave0:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.0.109:3306/spring?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=CTT
+      username: root
+      password: root
+
+
+
+

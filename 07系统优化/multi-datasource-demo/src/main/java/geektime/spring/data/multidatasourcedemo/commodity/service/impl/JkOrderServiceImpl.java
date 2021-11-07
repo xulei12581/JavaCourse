@@ -1,6 +1,7 @@
 package geektime.spring.data.multidatasourcedemo.commodity.service.impl;
 
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import geektime.spring.data.multidatasourcedemo.commodity.mapper.JkOrderMapper;
 import geektime.spring.data.multidatasourcedemo.commodity.service.JkOrderService;
@@ -23,11 +24,13 @@ public class JkOrderServiceImpl extends ServiceImpl<JkOrderMapper, JkOrderInfo> 
     @Resource(name = "jkOrderMapper")
     private JkOrderMapper jkOrderMapper;
 
+    @DS("slave0")
     @Override
     public List<JkOrderInfo> getJkOrderList() throws Exception {
         return jkOrderMapper.selectList(null);
     }
 
+    @DS("master")
     @Override
     @Transactional(rollbackFor = Exception.class, isolation = Isolation.REPEATABLE_READ)
     public Integer insertJkOrder(JkOrderInfo tbCommodityInfo) throws Exception {

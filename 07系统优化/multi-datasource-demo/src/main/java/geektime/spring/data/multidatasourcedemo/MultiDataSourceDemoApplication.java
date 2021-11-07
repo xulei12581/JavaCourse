@@ -24,43 +24,5 @@ public class MultiDataSourceDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(MultiDataSourceDemoApplication.class, args);
     }
-
-    @Bean
-    @ConfigurationProperties("foo.datasource")
-    public DataSourceProperties fooDataSourceProperties() {
-        return new DataSourceProperties();
-    }
-
-    @Bean
-    public DataSource fooDataSource() {
-        DataSourceProperties dataSourceProperties = fooDataSourceProperties();
-        log.info("foo datasource: {}", dataSourceProperties.getUrl());
-        return dataSourceProperties.initializeDataSourceBuilder().build();
-    }
-
-    @Bean
-    @Resource
-    public PlatformTransactionManager fooTxManager(DataSource fooDataSource) {
-        return new DataSourceTransactionManager(fooDataSource);
-    }
-
-    @Bean
-    @ConfigurationProperties("bar.datasource")
-    public DataSourceProperties barDataSourceProperties() {
-        return new DataSourceProperties();
-    }
-
-    @Bean
-    public DataSource barDataSource() {
-        DataSourceProperties dataSourceProperties = barDataSourceProperties();
-        log.info("bar datasource: {}", dataSourceProperties.getUrl());
-        return dataSourceProperties.initializeDataSourceBuilder().build();
-    }
-
-    @Bean
-    @Resource
-    public PlatformTransactionManager barTxManager(DataSource barDataSource) {
-        return new DataSourceTransactionManager(barDataSource);
-    }
 }
 
