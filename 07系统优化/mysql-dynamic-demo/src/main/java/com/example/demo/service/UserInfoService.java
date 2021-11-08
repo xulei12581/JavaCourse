@@ -7,13 +7,11 @@ import com.example.demo.dto.UserInfoRequest;
 import com.example.demo.entities.UserInfo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface UserInfoService extends IService<UserInfo> {
     String saveUser(UserInfoRequest request);
 
-    IPage<UserInfo> pageUser(PageRequest request);
-
-    String saveUserBath(UserInfoRequest request);
-
-    String updateUserBath();
+    List<UserInfo> getUserList();
 }

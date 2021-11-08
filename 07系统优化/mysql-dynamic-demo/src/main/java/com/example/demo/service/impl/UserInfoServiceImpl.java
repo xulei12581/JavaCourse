@@ -12,16 +12,18 @@ import com.example.demo.entities.UserInfo;
 import com.example.demo.mapper.UserInfoMapper;
 import com.example.demo.service.UserInfoService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
+
+    @Autowired
+    private UserInfoMapper userInfoMapper;
 
     @DS("master")
     @Transactional(rollbackFor = Exception.class)
@@ -38,36 +40,8 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
     @DS("slave_1")
     @Override
-    public IPage<UserInfo> pageUser(PageRequest request) {
-        return page(new Page<>(request.getPageNum(), request.getPageSize()), Wrappers.<UserInfo>lambdaQuery().orderByDesc(BaseEntity::getCreateTime));
-    }
+    public List<UserInfo> getUserList() {
 
-    @DS("master")
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public String saveUserBath(UserInfoRequest request) {
-        List<UserInfo> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            UserInfo userInfo = new UserInfo();
-            BeanUtils.copyProperties(request, userInfo);
-            userInfo.setUserName(request.getUserName() + UUID.randomUUID().toString());
-            list.add(userInfo);
-        }
-        int insert = baseMapper.insertBatchSomeColumn(list);
-        return String.valueOf(insert);
-    }
-
-    @DS("master")
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public String updateUserBath() {
-        List<UserInfo> userInfoList = baseMapper.selectList(null);
-        AtomicInteger i = new AtomicInteger(1);
-        userInfoList.forEach(userInfo -> {
-            userInfo.setUserName(userInfo.getUserName() + i);
-            i.getAndIncrement();
-        });
-        int batch = baseMapper.updateBatch(userInfoList);
-        return String.valueOf(batch);
+        return userInfoMapper.getUserList();
     }
 }

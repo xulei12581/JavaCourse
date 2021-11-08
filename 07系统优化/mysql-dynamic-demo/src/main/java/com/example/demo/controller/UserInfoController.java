@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Slf4j
 @RequestMapping("/userinfo")
@@ -31,19 +32,8 @@ public class UserInfoController {
 
     @GetMapping("/pageUser")
     @ApiOperation(value = "pageUser")
-    public IPage<UserInfo> pageUser(PageRequest request) {
-        return userInfoService.pageUser(request);
+    public List<UserInfo> getUserList() {
+        return userInfoService.getUserList();
     }
 
-    @PostMapping("/saveUserBath")
-    @ApiOperation(value = "saveUserBath")
-    public String saveUserBath(@RequestBody UserInfoRequest request) {
-        return userInfoService.saveUserBath(request);
-    }
-
-    @PostMapping("/updateUserBath")
-    @ApiOperation(value = "updateUserBath")
-    public String updateUserBath() {
-        return userInfoService.updateUserBath();
-    }
 }
