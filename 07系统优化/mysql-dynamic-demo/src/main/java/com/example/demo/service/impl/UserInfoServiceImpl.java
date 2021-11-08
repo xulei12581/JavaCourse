@@ -5,14 +5,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dynamic.dynamicdemo.dto.PageRequest;
-import com.dynamic.dynamicdemo.dto.UserInfoRequest;
-import com.dynamic.dynamicdemo.entities.BaseEntity;
-import com.dynamic.dynamicdemo.entities.UserInfo;
-import com.dynamic.dynamicdemo.mapper.UserInfoMapper;
-import com.dynamic.dynamicdemo.service.UserInfoService;
+import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.UserInfoRequest;
+import com.example.demo.entities.BaseEntity;
+import com.example.demo.entities.UserInfo;
+import com.example.demo.mapper.UserInfoMapper;
+import com.example.demo.service.UserInfoService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Service
+@Component
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
 
     @DS("master")

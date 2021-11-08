@@ -1,6 +1,6 @@
 package com.example.demo.mapper;
 
-import com.dynamic.dynamicdemo.entities.UserInfo;
+import com.example.demo.entities.UserInfo;
 import org.springframework.stereotype.Repository;
 
 @Repository

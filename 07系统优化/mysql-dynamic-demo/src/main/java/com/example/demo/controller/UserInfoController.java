@@ -1,24 +1,27 @@
 package com.example.demo.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.dynamic.dynamicdemo.dto.PageRequest;
-import com.dynamic.dynamicdemo.dto.UserInfoRequest;
-import com.dynamic.dynamicdemo.entities.UserInfo;
-import com.dynamic.dynamicdemo.service.UserInfoService;
+import com.example.demo.dto.PageRequest;
+import com.example.demo.dto.UserInfoRequest;
+import com.example.demo.entities.UserInfo;
+import com.example.demo.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 @Slf4j
-@Api(value = "/api/userinfo", tags = {"userinfo"})
-@RequestMapping("/api/userinfo")
+@RequestMapping("/userinfo")
 @RestController
 @RequiredArgsConstructor
 public class UserInfoController {
 
-    private final UserInfoService userInfoService;
+    @Resource
+    private UserInfoService userInfoService;
 
     @PostMapping("/saveUser")
     @ApiOperation(value = "saveUser")
