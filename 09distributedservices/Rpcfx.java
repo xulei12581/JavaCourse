@@ -41,7 +41,7 @@ public final class Rpcfx {
 
     public static <T> T create(final Class<T> serviceClass, final String url, Filter... filters) {
 
-        // 0. 替换动态代理 -> 字节码生成 作业1.2
+        // 作业1.2
         return (T) Proxy.newProxyInstance(Rpcfx.class.getClassLoader(), new Class[]{serviceClass}, new RpcfxInvocationHandler(serviceClass, url, filters));
 
     }
@@ -94,17 +94,25 @@ public final class Rpcfx {
             return JSON.parse(response.getResult().toString());
         }
 
-        private RpcfxResponse post(RpcfxRequest req, String url) throws IOException {
+        private RpcfxResponse post(RpcfxRequest req, String url) throws Exception {
             String reqJson = JSON.toJSONString(req);
             System.out.println("req json: "+reqJson);
 
             // 1.可以复用client
             // 2.尝试使用httpclient或者netty client
+
+            //httpclient请求
+
             OkHttpClient client = new OkHttpClient();
             final Request request = new Request.Builder()
                     .url(url)
                     .post(RequestBody.create(JSONTYPE, reqJson))
                     .build();
+            //http请求
+            String json = HttpClient.doPost(url,req.getParams().toString());
+            //netty请求
+            NettyClient nettyClient = new NettyClient();
+            nettyClient.connect(req.getIp(),req.getPort(),req.getUrl());
             String respJson = client.newCall(request).execute().body().string();
             System.out.println("resp json: "+respJson);
             return JSON.parseObject(respJson, RpcfxResponse.class);
