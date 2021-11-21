@@ -1,1 +1,4 @@
-必做题1没有上传rpc框架  直接把老师提示作业修改的两个java文件上传了 
+必做题1没有上传rpc框架  第三个http请求和neety请求具体实现在HttpClient.java和HttpClientInboundHandler.java以及NettyClient.java文件里
+
+
+必做题2在dubbo框架里
