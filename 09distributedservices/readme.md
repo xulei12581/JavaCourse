@@ -4,4 +4,4 @@
 第三个http请求和neety请求具体实现在HttpClient.java和HttpClientInboundHandler.java以及NettyClient.java文件里
 
 
-必做题2在dubbo框架里
+必做题2在rpc02框架里
