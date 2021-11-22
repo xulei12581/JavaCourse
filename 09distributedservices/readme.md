@@ -1,5 +1,6 @@
 必做题1没有上传rpc框架  
-第二个在Rpcfx.java文件里
+第一个小题在first文件夹里
+第二个在second文件夹里
 第三个http请求和neety请求具体实现在HttpClient.java和HttpClientInboundHandler.java以及NettyClient.java文件里
 
 
